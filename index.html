@@ -3,8 +3,8 @@
 <p>eg:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [3,2,1,5,6,4], k = 2</span><br><span class="line">Output: 5</span><br><span class="line">Input: target = 4, nums = [1,4,4]</span><br><span class="line">Output: 1</span><br><span class="line">Input: target = 11, nums = [1,1,1,1,1,1,1,1]</span><br><span class="line">Output: 0</span><br></pre></td></tr></table></figure>
 
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>本道题最快且最容易理解的写法是使用 sliding window。建立双指针 left 和 right，移动 right 对 total 进行累加。如果 total 大于等于 target，则触发内部 while 循环，调整 res 之后移动 left, total 减去 left 指向的 value。继续移动 right，直到 right 遍历整个数组。时间复杂度为 O(n)。</p>
-<p>本道题的 Binary Search 写法很有趣。<br>首先新建数组 total[i]，total 数组为升序。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h4><p>本题最快且最容易理解的写法是使用 sliding window。<br>建立双指针 left 和 right，移动 right 对 total 进行累加。如果 total 大于等于 target，则触发内部 while 循环，调整 res 之后移动 left, total 减去 left 指向的 value。继续移动 right，直到 right 遍历整个数组。时间复杂度为 O(n)。</p>
+<h4 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h4><p>使用 Binary Search 写法很有趣。<br>首先新建数组 total[i]，total 数组为升序。</p>
 <p>$total[0] &#x3D; 0$<br>$total[i] &#x3D; nums[0] + nums[1] + … nums[i-1]$</p>
 <p>对于每一个 i，利用 Binary Search 找到第一个 j ，满足 j &lt; i 并且 total[j] &gt; total[i] - target。并且易得 total[j - 1] &lt;&#x3D; total[i] - target</p>
 <p>$total[j] &gt; total[i] - target$<br>则 $nums[0] + nums[1] + nums[j - 1] &gt; nums[0] + nums[1] + nums[i - 1] - target$</p>
